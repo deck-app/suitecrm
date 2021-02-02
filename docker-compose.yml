@@ -24,5 +24,4 @@ services:
     depends_on:
       - 'mariadb'
 volumes:
-  mysql:
-    driver: "${VOLUMES_DRIVER}"
+    {}
