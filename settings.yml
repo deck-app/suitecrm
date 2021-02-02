@@ -63,4 +63,3 @@ system:
     http:
       SUITECRM_HTTP_PORT
     others:
-      - MYSQL_PORT
