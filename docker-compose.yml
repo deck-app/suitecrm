@@ -4,8 +4,8 @@ services:
     image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment: 
       - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=${MYSQL_USER}
-      - MARIADB_DATABASE=${MYSQL_DATABASE}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_DATABASE=${DB_DATABASE}
     volumes: 
       - '${DATA_PATH_HOST}:/bitnami/mariadb'
   suitecrm:
@@ -13,8 +13,8 @@ services:
     environment:
       - 'MARIADB_HOST=mariadb'
       - 'MARIADB_PORT_NUMBER=3306'
-      - 'SUITECRM_DATABASE_USER=${MYSQL_USER}'
-      - 'SUITECRM_DATABASE_NAME=${MYSQL_DATABASE}'
+      - 'SUITECRM_DATABASE_USER=${DB_USER}'
+      - 'SUITECRM_DATABASE_NAME=${DB_DATABASE}'
       - 'ALLOW_EMPTY_PASSWORD=yes'
     ports:
       - '${SUITECRM_HTTP_PORT}:8080'
