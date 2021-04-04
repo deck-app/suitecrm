@@ -62,4 +62,3 @@ system:
   ports:
     http:
       SUITECRM_HTTP_PORT
-    others:
