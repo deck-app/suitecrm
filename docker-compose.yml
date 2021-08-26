@@ -1,27 +1,32 @@
-version: "3"
-services:
-  mariadb:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
-    environment: 
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=${DB_USER}
-      - MARIADB_DATABASE=${DB_NAME}
-    volumes: 
-      - '${DATA_PATH_HOST}:/bitnami/mariadb'
-  suitecrm:
-    image: 'docker.io/bitnami/suitecrm:7-debian-10'
-    environment:
-      - 'MARIADB_HOST=mariadb'
-      - 'MARIADB_PORT_NUMBER=3306'
-      - 'SUITECRM_DATABASE_USER=${DB_USER}'
-      - 'SUITECRM_DATABASE_NAME=${DB_NAME}'
-      - 'ALLOW_EMPTY_PASSWORD=yes'
-    ports:
-      - '${SUITECRM_HTTP_PORT}:8080'
-      - '${SUITECRM_HTTPS_PORT}:8443'
+    version: '3'
+    services:
+      mariadb:
+        image: docker.io/bitnami/mariadb:10.3
+        environment:
+          # ALLOW_EMPTY_PASSWORD is recommended only for development.
+          - ALLOW_EMPTY_PASSWORD=yes
+          - MARIADB_USER=bn_suitecrm
+          - MARIADB_DATABASE=bitnami_suitecrm
+        volumes:
+          - '${DATA_PATH_HOST}:/bitnami/mariadb'
+      suitecrm:
+        image: docker.io/bitnami/suitecrm:7
+        ports:
+          - '80:8080'
+          - '443:8443'
+        environment:
+          - SUITECRM_DATABASE_HOST=mariadb
+          - SUITECRM_DATABASE_PORT_NUMBER=3306
+          - SUITECRM_DATABASE_USER=bn_suitecrm
+          - SUITECRM_DATABASE_NAME=bitnami_suitecrm
+          # ALLOW_EMPTY_PASSWORD is recommended only for development.
+          - ALLOW_EMPTY_PASSWORD=yes
+        volumes:
+          - '${APP_CODE_PATH_HOST}:/bitnami/suitecrm'
+        depends_on:
+          - mariadb
     volumes:
-      - '${APP_CODE_PATH_HOST}:/bitnami/suitecrm'
-    depends_on:
-      - 'mariadb'
-volumes:
-    {}
+      mariadb_data:
+        driver: local
+      suitecrm_data:
+        driver: local
