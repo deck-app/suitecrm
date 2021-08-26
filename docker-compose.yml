@@ -1,7 +1,7 @@
     version: '3'
     services:
       mariadb:
-        image: docker.io/bitnami/mariadb:10.3
+        build: './mariadb'
         environment:
           # ALLOW_EMPTY_PASSWORD is recommended only for development.
           - ALLOW_EMPTY_PASSWORD=yes
@@ -10,10 +10,10 @@
         volumes:
           - '${DATA_PATH_HOST}:/bitnami/mariadb'
       suitecrm:
-        image: docker.io/bitnami/suitecrm:7
+        build: './suitecrm'
         ports:
-          - '80:8080'
-          - '443:8443'
+          - '${SUITECRM_HTTP_PORT}:8080'
+          - '${SUITECRM_HTTPS_PORT}:8443'
         environment:
           - SUITECRM_DATABASE_HOST=mariadb
           - SUITECRM_DATABASE_PORT_NUMBER=3306
