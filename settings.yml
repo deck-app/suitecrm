@@ -1,5 +1,17 @@
 #User defined
 user:
+  back_end:
+    label:
+      Backend
+    hint:
+      Select a backend from the list above
+    type:
+      select
+    values:
+      - apache
+      - nginx
+    target:
+      BACK_END
   # php_version:
   #   label:
   #     PHP version
@@ -8,35 +20,41 @@ user:
   #   type:
   #     select
   #   values:
-  #     - 7.0
-  #     - 7.1
-  #     - 7.2
-  #     - 7.3
   #     - 7.4
   #   target:
   #     PHP_VERSION
 
-  # install_xdebug:
-  #   label:
-  #     Install XDEBUG?
-  #   type:
-  #     checkbox
-  #   hint:
-  #     Check to enable XDEBUG installation
-  #   target:
-  #     INSTALL_XDEBUG
-  # mysql_version:
-  #   label:
-  #     MySQL version
-  #   hint:
-  #     Select MySQL version
-  #   type:
-  #     select
-  #   values:
-  #     - "5.0"
-  #     - "7.0"
-  #   target:
-  #     MYSQL_VERSION
+  php_error_reporting:
+    label:
+      Enable PHP error reporting?
+    type:
+      checkbox
+    hint: Check the box to display PHP errors 
+    target:
+      DISPLAY_PHPERROR
+  php_xdebug:
+    label:
+      Enable PHP extension XDEBUG?
+    type:
+      checkbox
+    hint: Check the box to display extension xdebug
+    target:
+      XDEBUG
+    
+  MariaDB_version:
+    label:
+      MariaDB version
+    hint:
+      Select a MariaDB version from the list above
+    type:
+      select
+    values:
+      - latest
+      - 10.7
+      - 10.6
+      - 10.5
+    target:
+      MARIADB_VERSION
 
   # customize_server_root_path:
   #   label:
@@ -48,7 +66,7 @@ user:
   #   hint:
   #     Server document root
   #   target:
-  #     DOCUMENT_ROOT
+      # SERVER_ROOT
 
 #System defaults
 system:
@@ -56,9 +74,13 @@ system:
     true
   #For collecting and storing DB in .env
   #db/user/password
-  # db_credentials:
-  #   true
+  db_credentials:
+    true
   #Generate public ports for the docker image
   ports:
     http:
-      SUITECRM_HTTP_PORT
+      SUITE_HOST_HTTP_PORT
+    others:
+      - MYSQL_PORT
+      - PMA_PORT
+

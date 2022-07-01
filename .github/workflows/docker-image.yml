@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  SuiteCRM:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the image with php 7.4 and nginx
+        run: docker-compose build
+        env:
+          PHP_VERSION: "7.4"
+          BACK_END: nginx
+          DRUPAL_INSTALL: false
+          XDEBUG: true
+          DISPLAY_PHPERROR: true
+      - name: Build the image with php 7.4 and apache
+        run: docker-compose build
+        env:
+          PHP_VERSION: "7.4"
+          BACK_END: apache
+          DRUPAL_INSTALL: false
+          XDEBUG: true
+          DISPLAY_PHPERROR: true
