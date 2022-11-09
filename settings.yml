@@ -1,17 +1,17 @@
 #User defined
 user:
-  back_end:
-    label:
-      Backend
-    hint:
-      Select a backend from the list above
-    type:
-      select
-    values:
-      - apache
-      - nginx
-    target:
-      BACK_END
+  # back_end:
+  #   label:
+  #     Backend
+  #   hint:
+  #     Select a backend from the list above
+  #   type:
+  #     select
+  #   values:
+  #     - apache
+  #     - nginx
+  #   target:
+  #     BACK_END
   # php_version:
   #   label:
   #     PHP version
